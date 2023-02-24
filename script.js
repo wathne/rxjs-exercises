@@ -113,11 +113,6 @@ Array.prototype.map = function(projectionFunction) {
 
   return results;
 };
-
-// JSON.stringify([1,2,3].map(function(x) { return x + 1; })) === '[2,3,4]'
-
-// JSON.stringify([1,2,3].map((x) => x + 1)) === '[2,3,4]'
-
 /* STOP */
 console.log(JSON.stringify([1,2,3].map((x) => x + 1)) === '[2,3,4]');
 
@@ -261,11 +256,6 @@ Array.prototype.filter = function(predicateFunction) {
 
   return results;
 };
-
-// JSON.stringify([1,2,3].filter(function(x) { return x > 2})) === "[3]"
-
-// JSON.stringify([1,2,3].filter((x) => x > 2)) === "[3]"
-
 /* STOP */
 console.log(JSON.stringify([1,2,3].filter((x) => x > 2)) === "[3]");
 
@@ -412,18 +402,14 @@ Array.prototype.concatAll = function() {
 
   return results;
 };
-
-/* JSON.stringify(
- *   [ [1,2,3], [4,5,6], [7,8,9] ].concatAll()
- * ) === "[1,2,3,4,5,6,7,8,9]" */
-
-// Throws an error because this is a one-dimensional array.
-//[1,2,3].concatAll();
-
 /* STOP */
 console.log(
-  JSON.stringify(
-    [ [1,2,3], [4,5,6], [7,8,9] ].concatAll()
+  JSON.stringify([
+      [1,2,3],
+      [4,5,6],
+      [7,8,9],
+    ]
+    .concatAll()
   ) === "[1,2,3,4,5,6,7,8,9]"
 );
 
@@ -510,8 +496,16 @@ console.log((
           "id": 70111470,
           "title": "Die Hard",
           "boxarts": [
-            { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/DieHard150.jpg" },
-            { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/DieHard200.jpg" },
+            {
+              width: 150,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/DieHard150.jpg",
+            },
+            {
+              width: 200,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/DieHard200.jpg",
+            },
           ],
           "url": "http://api.netflix.com/catalog/titles/movies/70111470",
           "rating": 4.0,
@@ -521,8 +515,16 @@ console.log((
           "id": 654356453,
           "title": "Bad Boys",
           "boxarts": [
-            { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/BadBoys200.jpg" },
-            { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/BadBoys150.jpg" },
+            {
+              width: 200,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/BadBoys200.jpg",
+            },
+            {
+              width: 150,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/BadBoys150.jpg",
+            },
           ],
           "url": "http://api.netflix.com/catalog/titles/movies/70111470",
           "rating": 5.0,
@@ -537,8 +539,16 @@ console.log((
           "id": 65432445,
           "title": "The Chamber",
           "boxarts": [
-            { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/TheChamber150.jpg" },
-            { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/TheChamber200.jpg" },
+            {
+              width: 150,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/TheChamber150.jpg",
+            },
+            {
+              width: 200,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/TheChamber200.jpg",
+            },
           ],
           "url": "http://api.netflix.com/catalog/titles/movies/70111470",
           "rating": 4.0,
@@ -548,9 +558,21 @@ console.log((
           "id": 675465,
           "title": "Fracture",
           "boxarts": [
-            { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture200.jpg" },
-            { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture150.jpg" },
-            { width: 300, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture300.jpg" },
+            {
+              width: 200,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/Fracture200.jpg",
+            },
+            {
+              width: 150,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/Fracture150.jpg",
+            },
+            {
+              width: 300,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/Fracture300.jpg",
+            },
           ],
           "url": "http://api.netflix.com/catalog/titles/movies/70111470",
           "rating": 5.0,
@@ -560,13 +582,31 @@ console.log((
     },
   ];
 
-  // Use one or more map, concatAll, and filter calls to create an array with the following items
-  // [
-  //	 {"id": 675465,"title": "Fracture","boxart":"http://cdn-0.nflximg.com/images/2891/Fracture150.jpg" },
-  //	 {"id": 65432445,"title": "The Chamber","boxart":"http://cdn-0.nflximg.com/images/2891/TheChamber150.jpg" },
-  //	 {"id": 654356453,"title": "Bad Boys","boxart":"http://cdn-0.nflximg.com/images/2891/BadBoys150.jpg" },
-  //	 {"id": 70111470,"title": "Die Hard","boxart":"http://cdn-0.nflximg.com/images/2891/DieHard150.jpg" }
-  // ];
+  /* Use one or more map, concatAll, and filter calls to create an array with 
+   * the following items
+   * [
+   *   {
+         "id": 675465,
+         "title": "Fracture",
+         "boxart": "http://cdn-0.nflximg.com/images/2891/Fracture150.jpg",
+       },
+   *   {
+         "id": 65432445,
+         "title": "The Chamber",
+         "boxart": "http://cdn-0.nflximg.com/images/2891/TheChamber150.jpg",
+       },
+   *   {
+         "id": 654356453,
+         "title": "Bad Boys",
+         "boxart": "http://cdn-0.nflximg.com/images/2891/BadBoys150.jpg",
+       },
+   *   {
+         "id": 70111470,
+         "title": "Die Hard",
+         "boxart": "http://cdn-0.nflximg.com/images/2891/DieHard150.jpg",
+       },
+   * ];
+   */
 
   return movieLists
     .map((movieList) => movieList.videos
@@ -587,19 +627,184 @@ console.log((
 
 
 
-console.log("Exercise 13:");
+console.log("Exercise 13: Implement concatMap()");
 /* START */
+Array.prototype.concatMap = function(projectionFunctionThatReturnsArray) {
+  return this
+    .map((item) => projectionFunctionThatReturnsArray(item))
+    .concatAll();
+
+    // ------------   INSERT CODE HERE!  ----------------------------
+    // Apply the projection function to each item. The projection
+    // function will return a new child array. This will create a
+    // two-dimensional array.
+    // ------------   INSERT CODE HERE!  ----------------------------
+
+    // apply the concatAll function to flatten the two-dimensional array
+};
 /* STOP */
+const spanishFrenchEnglishWords = [
+  ["cero","rien","zero"],
+  ["uno","un","one"],
+  ["dos","deux","two"],
+];
+
+/* Collect all the words for each number, in every language, in a single, flat
+ * list. */
+const allWords = [0,1,2]
+  .concatMap((index) => spanishFrenchEnglishWords[index]);
+
+console.log(
+  JSON.stringify(allWords
+  ) === '["cero","rien","zero","uno","un","one","dos","deux","two"]'
+);
 
 
 
-console.log("Exercise 14:");
+console.log(
+  "Exercise 14: Use concatMap() to retrieve id, title, and 150x200 box art " +
+  "url for every video");
+console.log((
 /* START */
+() => {
+  const movieLists = [
+    {
+      name: "Instant Queue",
+      videos : [
+        {
+          "id": 70111470,
+          "title": "Die Hard",
+          "boxarts": [
+            {
+              width: 150,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/DieHard150.jpg",
+            },
+            {
+              width: 200,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/DieHard200.jpg",
+            },
+          ],
+          "url": "http://api.netflix.com/catalog/titles/movies/70111470",
+          "rating": 4.0,
+          "bookmark": [],
+        },
+        {
+          "id": 654356453,
+          "title": "Bad Boys",
+          "boxarts": [
+            {
+              width: 200,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/BadBoys200.jpg",
+            },
+            {
+              width: 150,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/BadBoys150.jpg",
+            },
+          ],
+          "url": "http://api.netflix.com/catalog/titles/movies/70111470",
+          "rating": 5.0,
+          "bookmark": [{ id: 432534, time: 65876586 }],
+        },
+          ],
+        },
+        {
+      name: "New Releases",
+      videos: [
+        {
+          "id": 65432445,
+          "title": "The Chamber",
+          "boxarts": [
+            {
+              width: 150,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/TheChamber150.jpg",
+            },
+            {
+              width: 200,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/TheChamber200.jpg",
+            },
+          ],
+          "url": "http://api.netflix.com/catalog/titles/movies/70111470",
+          "rating": 4.0,
+          "bookmark": [],
+        },
+        {
+          "id": 675465,
+          "title": "Fracture",
+          "boxarts": [
+            {
+              width: 200,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/Fracture200.jpg",
+            },
+            {
+              width: 150,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/Fracture150.jpg",
+            },
+            {
+              width: 300,
+              height: 200,
+              url: "http://cdn-0.nflximg.com/images/2891/Fracture300.jpg",
+            },
+          ],
+          "url": "http://api.netflix.com/catalog/titles/movies/70111470",
+          "rating": 5.0,
+          "bookmark": [{ id: 432534, time: 65876586 }],
+        },
+      ],
+    },
+  ];
+
+  /* Use one or more map, concatAll, and filter calls to create an array with 
+   * the following items
+   * [
+   *   {
+         "id": 675465,
+         "title": "Fracture",
+         "boxart": "http://cdn-0.nflximg.com/images/2891/Fracture150.jpg",
+       },
+   *   {
+         "id": 65432445,
+         "title": "The Chamber",
+         "boxart": "http://cdn-0.nflximg.com/images/2891/TheChamber150.jpg",
+       },
+   *   {
+         "id": 654356453,
+         "title": "Bad Boys",
+         "boxart": "http://cdn-0.nflximg.com/images/2891/BadBoys150.jpg",
+       },
+   *   {
+         "id": 70111470,
+         "title": "Die Hard",
+         "boxart": "http://cdn-0.nflximg.com/images/2891/DieHard150.jpg",
+       },
+   * ];
+   */
+
+  return movieLists
+    .concatMap((movieList) => movieList.videos
+      .concatMap((video) => video.boxarts
+        .filter((boxart) => boxart.width === 150)
+        .map((boxart) => ({
+          id: video.id,
+          title: video.title,
+          boxart: boxart.url,
+        }))
+      )
+    ); // Complete this expression!
+}
 /* STOP */
+)());
 
 
 
-console.log("Exercise 15:");
+console.log("Exercise 15: Use forEach to find the largest box art");
 /* START */
 /* STOP */
 
